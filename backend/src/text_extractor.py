@@ -2,7 +2,7 @@ import easyocr
 import numpy as np
 
 class TextExtractor:
-    def __init__(self, languages):
+    def __init__(self, languages: list[str]):
         self.__reader = easyocr.Reader(languages)
 
     def extract_text(self, image_numpy_array: np.ndarray) -> str:
