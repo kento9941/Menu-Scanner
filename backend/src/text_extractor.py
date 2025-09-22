@@ -2,10 +2,9 @@ import easyocr
 import numpy as np
 
 class TextExtractor:
-    def __init__(self, languages: list[str]):
-        self.__reader = easyocr.Reader(languages)
 
-    def extract_text(self, image_numpy_array: np.ndarray) -> str:
+    def extract_text(self, image_numpy_array: np.ndarray, source_language: list[str]) -> str:
+        self.__reader = easyocr.Reader(source_language)
         results = self.__reader.readtext(image_numpy_array, paragraph=False)
 
         # convert into one string
