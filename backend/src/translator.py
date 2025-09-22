@@ -18,7 +18,7 @@ class Translator:
             response.raise_for_status() # HTTP error
             data = response.json()
             detected_language = data.get("detectedLanguage", {}).get("language")
-            translated_text = data["translatedText"]
+            translated_text = data.get("translatedText")
             return {"detected_language": detected_language, "translated_text": translated_text}
         except requests.exceptions.RequestException as e:
             raise Exception(f"Request failed: {e}")

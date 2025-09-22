@@ -1,4 +1,4 @@
-from backend.src.pixabay_api import PixabayAPI
+from src.pixabay_api import PixabayAPI
 import unittest
 
 class TestPixabayAPI(unittest.TestCase):

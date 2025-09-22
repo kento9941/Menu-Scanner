@@ -1,4 +1,4 @@
-from backend.src.text_extractor import TextExtractor
+from src.text_extractor import TextExtractor
 import numpy as np
 import unittest
 from PIL import Image
@@ -6,8 +6,8 @@ from PIL import Image
 class TestTextExtractor(unittest.TestCase):
     def setUp(self):
         self.text_extractor = TextExtractor(["ja", "en"])
-        self.EN_test_image = "backend/tests/images/EN_sample_image.png"
-        self.JP_test_image = "backend/tests/images/JP_sample_image.png"
+        self.EN_test_image = "tests/images/EN_sample_image.png"
+        self.JP_test_image = "tests/images/JP_sample_image.png"
         
     def test_extract_English_text(self):
         image_numpy_array = np.array(Image.open(self.EN_test_image))

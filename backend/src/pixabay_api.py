@@ -1,7 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
-from backend.src.interfaces.image_accessor_interface import ImageAccessorInterface
+from src.interfaces.image_accessor_interface import ImageAccessorInterface
 
 class PixabayAPI(ImageAccessorInterface):
     def __init__(self):
