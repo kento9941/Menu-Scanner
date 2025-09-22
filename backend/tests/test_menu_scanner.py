@@ -9,13 +9,13 @@ import unittest
 
 class TestMenuScanner(unittest.TestCase):
     def setUp(self):        
-        self.menu_scanner = MenuScanner(TextExtractor(["ja", "en"]), Translator(), PixabayAPI())
+        self.menu_scanner = MenuScanner(TextExtractor(), Translator(), PixabayAPI())
         self.EN_test_image = "tests/images/EN_sample_image.png"
         self.JP_test_image = "tests/images/JP_sample_image.png"
 
     def test_scan_menu_Japanese(self):
         image_numpy_array = np.array(Image.open(self.JP_test_image))
-        result_images = self.menu_scanner.scan_menu(image_numpy_array)
+        result_images = self.menu_scanner.scan_menu(image_numpy_array, "ja", "en")
         for image in result_images:
             print(image)
             
