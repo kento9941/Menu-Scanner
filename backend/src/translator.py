@@ -4,7 +4,7 @@ class Translator:
     def __init__(self):
         self.__url = "http://localhost:5000/translate"
 
-    def translate_text(self, original_text, source_language="auto", target_language="en") -> dict[str, str]:
+    def translate_text(self, original_text: str, source_language: str = "auto", target_language: str = "en") -> dict[str, str]:
         payload = {
             "q": original_text,
             "source": source_language,
