@@ -1,4 +1,4 @@
-from backend.src.translator import Translator
+from src.translator import Translator
 import unittest
 
 class TestTranslator(unittest.TestCase):

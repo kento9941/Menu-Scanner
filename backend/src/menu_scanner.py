@@ -1,6 +1,6 @@
-from .text_extractor import TextExtractor
-from .translator import Translator
-from .pixabay_api import PixabayAPI
+from src.text_extractor import TextExtractor
+from src.translator import Translator
+from src.pixabay_api import PixabayAPI
 import numpy as np
 
 class MenuScanner:
@@ -13,7 +13,7 @@ class MenuScanner:
         self.__translator = translator
         self.__pixabay_api = pixabay_api
 
-    def scan_menu(self, image_numpy_array: np.ndarray):
+    def scan_menu(self, image_numpy_array: np.ndarray) -> set[str]:
 
         # extract text from menu image
         extracted_text = self.__text_extractor.extract_text(image_numpy_array)
