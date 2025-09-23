@@ -12,7 +12,7 @@ class MenuScanner:
         self.__translator = translator
         self.__pixabay_api = pixabay_api
 
-    def scan_menu(self, image_numpy_array: np.ndarray, source_language: str = "en", search_language: str = "en") -> set[str]:
+    def scan_menu(self, image_numpy_array: np.ndarray, source_language: str = "en", search_language: str = "en") -> dict:
 
         # extract text from menu image
         extracted_text = self.__text_extractor.extract_text(image_numpy_array, self.LANGUAGES[source_language])
@@ -20,6 +20,7 @@ class MenuScanner:
         # translate to English
         translated_text = self.__translator.translate_text(extracted_text)
 
-        # get dish image from Pixabay
-        return self.__pixabay_api.get_image(translated_text, search_language)
+        # get dish image from Pixabay (search in English is recommended)
+        image_urls = self.__pixabay_api.get_image(translated_text, search_language)
 
+        return {"extracted_text": extracted_text, "translated_text": translated_text, "image_urls": image_urls}
