@@ -1,3 +1,4 @@
+from ast import List
 import requests
 import os
 from dotenv import load_dotenv
@@ -8,7 +9,7 @@ class PixabayAPI(ImageAccessorInterface):
         load_dotenv()
         self.__api_key = os.getenv("PIXABAY_API_KEY")
 
-    def get_image(self, query: str, language: str = "en", max_images=3) -> set[str]:
+    def get_image(self, query: str, language: str = "en", max_images=3) -> list[str]:
         url = 'https://pixabay.com/api/'
         params = {
             'key': self.__api_key,
@@ -38,4 +39,4 @@ class PixabayAPI(ImageAccessorInterface):
 
         # get image urls
         image_urls = set(hit['webformatURL'] for hit in data.get('hits', []))
-        return image_urls
+        return list(image_urls)
