@@ -12,6 +12,7 @@ export default function UploadButton({
         fileInputRef.current?.click();
     };
 
+    // read the image file
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0]
         if (file) {
