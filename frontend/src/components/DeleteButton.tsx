@@ -1,13 +1,25 @@
 "use client";
 
 export default function DeleteButton({
+    imageSrc,
     setImageSrc
 }: {
+    imageSrc: string | null;
     setImageSrc: (src: string | null) => void;
 }) {
+    const handleDelete = () => {
+        
+        const confirmed = window.confirm("Are you sure to delete the image?");
+        if (confirmed) {
+        setImageSrc(null);
+        }
+        
+      };
     return (
         <button
             className="px-4 py-2 font-medium text-gray-600 transition-colors duration-200 sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+            disabled={ !imageSrc }
+            onClick={ handleDelete }
         >
             <svg
                 className="w-5 h-5 sm:w-6 sm:h-6"

@@ -17,7 +17,7 @@ export default function PhotoButtonWrapper({
         >
             <CameraButton setImageSrc={setImageSrc}/>
             <UploadButton setImageSrc={setImageSrc}/>
-            <DeleteButton setImageSrc={setImageSrc}/>
+            <DeleteButton imageSrc={imageSrc} setImageSrc={setImageSrc}/>
         </div>
     )
 }
