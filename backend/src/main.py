@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, Form, File, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from io import BytesIO
 import numpy as np
 from PIL import Image
@@ -9,6 +10,14 @@ from src.translator import Translator
 from src.pixabay_api import PixabayAPI
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 menu_scanner = MenuScanner(TextExtractor(), Translator(), PixabayAPI())
 
