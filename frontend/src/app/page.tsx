@@ -1,12 +1,16 @@
 "use client";
 import Image from "next/image";
+import { uploadImage } from "@/api/menu";
 import PhotoButtonWrapper from "@/components/photo-button-wrapper";
 import { WheelPicker, WheelPickerWrapper, type WheelPickerOption } from "@/components/wheel-picker";
 import { useState } from "react";
 
 export default function Home() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [value, setValue] = useState<string>("en");
+  const [language, setLanguage] = useState<string>("en");
+  const [extractedText, setExtractedText] = useState<string>("");
+  const [translatedText, setTranslatedText] = useState<string>("");
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   const options: WheelPickerOption[] = [
     {
@@ -19,20 +23,33 @@ export default function Home() {
     },
   ];
 
+  async function handleUpload(file: File) {
+    try {
+      const data = await uploadImage(language, file);
+      setExtractedText(data["extracted_text"]);
+      setTranslatedText(data["translated_text"]);
+      setImageUrls(data["image_urls"])
+
+    } catch (err) {
+      console.error(err);
+      alert("アップロードに失敗しました");
+    }
+  }
+
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
 
         {/* wheel picker */}
         <WheelPickerWrapper>
-          <WheelPicker options={options} value={value} onValueChange={setValue} />
+          <WheelPicker options={options} value={language} onValueChange={setLanguage} />
         </WheelPickerWrapper>
 
         {/* uploaded image */}
         {imageSrc && (
           <img
             src={ imageSrc }
-            alt="Your menu image..."
+            alt="Your Menu Image..."
             className="max-w-xs rounded-lg shadow"
           />
         )}
@@ -41,6 +58,27 @@ export default function Home() {
         <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc } />
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <button
+            onClick={async () => {
+              if (!imageSrc) return;
+              const file = await fetch(imageSrc)
+                .then(res => res.blob())
+                .then(blob => new File([blob], "upload.png", { type: blob.type }));
+              await handleUpload(file);
+            }}
+          >
+            APIに送信
+          </button>
+
+          {imageUrls && imageUrls.map((url, idx) => (
+            <img
+              key={idx}
+              src={url}
+              alt={`Dish Image ${idx}`}
+              className="max-w-xs rounded-lg shadow"
+            />
+          ))}
+
           
         </div>
       </main>
