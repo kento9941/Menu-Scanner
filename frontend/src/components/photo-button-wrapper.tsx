@@ -1,8 +1,8 @@
 "use client";
 
-import CameraButton from "./CameraButton";
-import UploadButton from "./UploadButton";
-import DeleteButton from "./DeleteButton";
+import CameraButton from "./camera-button";
+import UploadButton from "./upload-button";
+import DeleteButton from "./delete-button";
 
 export default function PhotoButtonWrapper({
     imageSrc,
