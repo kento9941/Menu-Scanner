@@ -4,8 +4,22 @@ from src.pixabay_api import PixabayAPI
 import numpy as np
 
 class MenuScanner:
-    LANGUAGES = {"en": ["en"],
-                "ja": ["ja", "en"]}    
+    LANGUAGES = {"chi_sim": ["chi_sim", "en"],
+                "nl": ["nl", "en"],
+                "en": ["en"],
+                "fr": ["fr", "en"],
+                "de": ["de", "en"],
+                "id": ["id", "en"],
+                "it": ["it", "en"],
+                "ja": ["ja", "en"],
+                "ko": ["ko", "en"],
+                "pl": ["pl", "en"],
+                "pt": ["pt", "en"],
+                "ro": ["ro", "en"],
+                "ru": ["ru", "en"],
+                "es": ["es", "en"],
+                "uk": ["uk", "en"],
+                }
 
     def __init__(self, text_extractor: TextExtractor, translator: Translator, pixabay_api: PixabayAPI):
         self.__text_extractor = text_extractor
