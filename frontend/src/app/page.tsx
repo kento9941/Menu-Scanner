@@ -14,12 +14,64 @@ export default function Home() {
 
   const options: WheelPickerOption[] = [
     {
+      label: "Chinese",
+      value: "ch_sim",
+    },
+    {
+      label: "Dutch",
+      value: "nl",
+    },
+    {
       label: "English",
       value: "en",
     },
     {
+      label: "French",
+      value: "fr",
+    },
+    {
+      label: "German",
+      value: "de",
+    },
+    {
+      label: "Indonesian",
+      value: "id",
+    },
+    {
+      label: "Italian",
+      value: "it",
+    },
+    {
       label: "Japanese",
       value: "ja",
+    },
+    {
+      label: "Korean",
+      value: "ko",
+    },
+    {
+      label: "Polish",
+      value: "pl",
+    },
+    {
+      label: "Portuguese",
+      value: "pt",
+    },
+    {
+      label: "Romanian",
+      value: "ro",
+    },
+    {
+      label: "Russian",
+      value: "ru",
+    },
+    {
+      label: "Spanish",
+      value: "es",
+    },
+    {
+      label: "Ukrainian",
+      value: "uk",
     },
   ];
 
@@ -32,7 +84,7 @@ export default function Home() {
 
     } catch (err) {
       console.error(err);
-      alert("アップロードに失敗しました");
+      alert("Upload Failed");
     }
   }
 
