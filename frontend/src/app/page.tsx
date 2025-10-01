@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function Home() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [language, setLanguage] = useState<string>("en");
+  const [loading, setLoading] = useState(false);
   const [extractedText, setExtractedText] = useState<string>("");
   const [translatedText, setTranslatedText] = useState<string>("");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
@@ -77,14 +78,21 @@ export default function Home() {
 
   async function handleUpload(file: File) {
     try {
+      setLoading(true)
       const data = await uploadImage(language, file);
       setExtractedText(data["extracted_text"]);
       setTranslatedText(data["translated_text"]);
       setImageUrls(data["image_urls"])
 
-    } catch (err) {
+    }
+    catch (err)
+    {
       console.error(err);
       alert("Upload Failed");
+    } 
+    finally
+    {
+      setLoading(false);
     }
   }
 
@@ -109,30 +117,31 @@ export default function Home() {
         {/* buttons */}
         <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc } />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <button
-            onClick={async () => {
-              if (!imageSrc) return;
-              const file = await fetch(imageSrc)
-                .then(res => res.blob())
-                .then(blob => new File([blob], "upload.png", { type: blob.type }));
-              await handleUpload(file);
-            }}
-          >
-            APIに送信
-          </button>
-
-          {imageUrls && imageUrls.map((url, idx) => (
-            <img
-              key={idx}
-              src={url}
-              alt={`Dish Image ${idx}`}
-              className="max-w-xs rounded-lg shadow"
-            />
-          ))}
-
-          
+        <button
+          onClick={async () => {
+            if (!imageSrc) return;
+            const file = await fetch(imageSrc)
+              .then(res => res.blob())
+              .then(blob => new File([blob], "upload.png", { type: blob.type }));
+            await handleUpload(file);
+          }}
+        >
+          Get Image
+        </button>        
+        
+        <div className="w-full flex justify-center">
+          {loading && <div className="loader"></div>}
         </div>
+
+        {imageUrls && imageUrls.map((url, idx) => (
+          <img
+            key={idx}
+            src={url}
+            alt={`Dish Image ${idx}`}
+            className="max-w-xs rounded-lg shadow"
+          />
+        ))}
+
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
