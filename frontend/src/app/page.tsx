@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { uploadImage } from "@/api/menu";
 import PhotoButtonWrapper from "@/components/photo-button-wrapper";
-import { WheelPicker, WheelPickerWrapper, type WheelPickerOption } from "@/components/wheel-picker";
+import LanguageDropdown from "@/components/language-selector";
 import { useState } from "react";
 
 export default function Home() {
@@ -12,69 +12,6 @@ export default function Home() {
   const [extractedText, setExtractedText] = useState<string>("");
   const [translatedText, setTranslatedText] = useState<string>("");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-
-  const options: WheelPickerOption[] = [
-    {
-      label: "Chinese",
-      value: "ch_sim",
-    },
-    {
-      label: "Dutch",
-      value: "nl",
-    },
-    {
-      label: "English",
-      value: "en",
-    },
-    {
-      label: "French",
-      value: "fr",
-    },
-    {
-      label: "German",
-      value: "de",
-    },
-    {
-      label: "Indonesian",
-      value: "id",
-    },
-    {
-      label: "Italian",
-      value: "it",
-    },
-    {
-      label: "Japanese",
-      value: "ja",
-    },
-    {
-      label: "Korean",
-      value: "ko",
-    },
-    {
-      label: "Polish",
-      value: "pl",
-    },
-    {
-      label: "Portuguese",
-      value: "pt",
-    },
-    {
-      label: "Romanian",
-      value: "ro",
-    },
-    {
-      label: "Russian",
-      value: "ru",
-    },
-    {
-      label: "Spanish",
-      value: "es",
-    },
-    {
-      label: "Ukrainian",
-      value: "uk",
-    },
-  ];
 
   async function handleUpload(file: File) {
     try {
@@ -99,11 +36,9 @@ export default function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-
+        <p>selected lang: { language }</p>
         {/* wheel picker */}
-        <WheelPickerWrapper>
-          <WheelPicker options={options} value={language} onValueChange={setLanguage} />
-        </WheelPickerWrapper>
+        <LanguageDropdown language={ language } setLanguage={ setLanguage } />
 
         {/* uploaded image */}
         {imageSrc && (
