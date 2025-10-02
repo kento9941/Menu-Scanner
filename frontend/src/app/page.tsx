@@ -2,100 +2,43 @@
 import Image from "next/image";
 import { uploadImage } from "@/api/menu";
 import PhotoButtonWrapper from "@/components/photo-button-wrapper";
-import { WheelPicker, WheelPickerWrapper, type WheelPickerOption } from "@/components/wheel-picker";
+import LanguageDropdown from "@/components/language-selector";
 import { useState } from "react";
 
 export default function Home() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [language, setLanguage] = useState<string>("en");
+  const [loading, setLoading] = useState(false);
   const [extractedText, setExtractedText] = useState<string>("");
   const [translatedText, setTranslatedText] = useState<string>("");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
-  const options: WheelPickerOption[] = [
-    {
-      label: "Chinese",
-      value: "ch_sim",
-    },
-    {
-      label: "Dutch",
-      value: "nl",
-    },
-    {
-      label: "English",
-      value: "en",
-    },
-    {
-      label: "French",
-      value: "fr",
-    },
-    {
-      label: "German",
-      value: "de",
-    },
-    {
-      label: "Indonesian",
-      value: "id",
-    },
-    {
-      label: "Italian",
-      value: "it",
-    },
-    {
-      label: "Japanese",
-      value: "ja",
-    },
-    {
-      label: "Korean",
-      value: "ko",
-    },
-    {
-      label: "Polish",
-      value: "pl",
-    },
-    {
-      label: "Portuguese",
-      value: "pt",
-    },
-    {
-      label: "Romanian",
-      value: "ro",
-    },
-    {
-      label: "Russian",
-      value: "ru",
-    },
-    {
-      label: "Spanish",
-      value: "es",
-    },
-    {
-      label: "Ukrainian",
-      value: "uk",
-    },
-  ];
-
   async function handleUpload(file: File) {
     try {
+      setLoading(true)
       const data = await uploadImage(language, file);
       setExtractedText(data["extracted_text"]);
       setTranslatedText(data["translated_text"]);
       setImageUrls(data["image_urls"])
 
-    } catch (err) {
+    }
+    catch (err)
+    {
       console.error(err);
       alert("Upload Failed");
+    } 
+    finally
+    {
+      setLoading(false);
     }
   }
 
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-
+        <p>selected lang: { language }</p>
         {/* wheel picker */}
-        <WheelPickerWrapper>
-          <WheelPicker options={options} value={language} onValueChange={setLanguage} />
-        </WheelPickerWrapper>
+        <LanguageDropdown language={ language } setLanguage={ setLanguage } />
 
         {/* uploaded image */}
         {imageSrc && (
@@ -109,30 +52,31 @@ export default function Home() {
         {/* buttons */}
         <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc } />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <button
-            onClick={async () => {
-              if (!imageSrc) return;
-              const file = await fetch(imageSrc)
-                .then(res => res.blob())
-                .then(blob => new File([blob], "upload.png", { type: blob.type }));
-              await handleUpload(file);
-            }}
-          >
-            APIに送信
-          </button>
-
-          {imageUrls && imageUrls.map((url, idx) => (
-            <img
-              key={idx}
-              src={url}
-              alt={`Dish Image ${idx}`}
-              className="max-w-xs rounded-lg shadow"
-            />
-          ))}
-
-          
+        <button
+          onClick={async () => {
+            if (!imageSrc) return;
+            const file = await fetch(imageSrc)
+              .then(res => res.blob())
+              .then(blob => new File([blob], "upload.png", { type: blob.type }));
+            await handleUpload(file);
+          }}
+        >
+          Get Image
+        </button>        
+        
+        <div className="w-full flex justify-center">
+          {loading && <div className="loader"></div>}
         </div>
+
+        {imageUrls && imageUrls.map((url, idx) => (
+          <img
+            key={idx}
+            src={url}
+            alt={`Dish Image ${idx}`}
+            className="max-w-xs rounded-lg shadow"
+          />
+        ))}
+
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
