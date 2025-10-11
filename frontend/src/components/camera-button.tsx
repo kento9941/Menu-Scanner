@@ -25,7 +25,7 @@ export default function CameraButton({
     return (
         <>
             <button
-                className="px-4 py-2 font-medium text-gray-600 transition-colors duration-200 sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+                className="h-10 px-4 py-2 font-medium text-gray-600 transition-colors duration-200 sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
                 onClick={ handleButtonClick }
             >
                 <svg

@@ -57,7 +57,7 @@ export default function LanguageDropdown({
 
   return (
     <div className="select">
-      <div className="selected">
+      <div className="h-10 selected">
         <span>{ options.find(o => o.value === language)?.label }</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
