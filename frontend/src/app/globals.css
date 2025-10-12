@@ -11,13 +11,13 @@ body {
 
 .auto-show {
   animation: text-appear both;
-  animation-timeline: view(20% 5%);
+  animation-timeline: view(10% 0);
 }
 
 @keyframes text-appear {
   from {
     opacity: 0;
-    transform: translateY(20vw);
+    transform: translateY(20vh);
   }
   to {
     opacity: 1;

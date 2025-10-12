@@ -36,14 +36,19 @@ export default function Home() {
   return (
     <>
       <header id="sticky-parallax-header">
-        <span className="header-text">Menu Scanner</span>
+        <span
+          className="header-text cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          Menu Scanner
+        </span>
       </header>
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 gap-16">
         <main className="flex flex-col gap-[32px] row-start-2 items-center pt-[100vh]">
 
-          <div className="auto-show upload-container">
+          <div className="upload-container">
             {/* dotted box */}
-            <div className="upload-box">
+            <div className="upload-box auto-show">
               {imageSrc ? (
                 <img
                   src={imageSrc}
@@ -58,21 +63,23 @@ export default function Home() {
               )}
             </div>
 
-            <div className="flex gap-[4em] mt-5 items-start justify-center">
-              {/* buttons */}
-              <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
+            <div className="auto-show">
+              <div className="flex gap-[4em] mt-2 items-start justify-center">
+                {/* buttons */}
+                <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
 
-              {/* menu language selector */}
-              <LanguageDropdown language={ language } setLanguage={ setLanguage } />
-            </div>
+                {/* menu language selector */}
+                <LanguageDropdown language={ language } setLanguage={ setLanguage } />
+              </div>
 
-            <div className="flex justify-center mt-5">
-              {/* submit button */}
-              <SubmitButton
-                loading={loading}
-                imageSrc={imageSrc}
-                handleUpload={handleUpload}
-              />
+              <div className="flex justify-center mt-5">
+                {/* submit button */}
+                <SubmitButton
+                  loading={loading}
+                  imageSrc={imageSrc}
+                  handleUpload={handleUpload}
+                />
+              </div>
             </div>
           </div>
 
