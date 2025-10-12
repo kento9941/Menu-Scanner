@@ -11,7 +11,7 @@ body {
 
 .auto-show {
   animation: text-appear both;
-  animation-timeline: view(20% 10%);
+  animation-timeline: view(20% 5%);
 }
 
 @keyframes text-appear {
@@ -124,8 +124,7 @@ body {
   justify-content: center;
   overflow: hidden;
   font-size: 3em;
-  border: 5px dashed white;
-  border-radius: 20px;
+  border: 0.1em dashed white;
   padding: 1em;
 }
 
@@ -239,6 +238,117 @@ body {
 }
 .select:has(.options input[type="radio"]#option-3:checked) .selected::before {
   content: attr(data-three);
+}
+/*********************************/
+
+
+/********* Buttons *********/
+.fancy {
+  background-color: transparent;
+  border: 0.25em solid white;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 100;
+  letter-spacing: 0.05em;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0.5em 1em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 2em;
+}
+
+.fancy::before {
+  content: "";
+  width: 3rem;
+  height: 2rem;
+  background: transparent;
+  top: 50%;
+  left: 1.5em;
+  position: absolute;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+}
+
+.fancy .text {
+  font-weight: normal;
+  font-size: 1em;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+
+.fancy .top-key,
+.fancy .bottom-key {
+  position: absolute;
+  height: 2px;
+  width: 60%;
+  background: white;
+  transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+
+.fancy .top-key {
+  top: -2px;
+  left: 20%;
+}
+
+.fancy .bottom-key {
+  bottom: -2px;
+  right: 20%;
+}
+
+.fancy:hover {
+  background: white;
+}
+
+.fancy::after {
+  content: "";
+  position: absolute;
+  inset: 0; 
+  border: 0.1em solid rgba(150, 134, 103, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.fancy:hover::after {
+  opacity: 1;
+}
+
+.fancy:hover .text {
+  color: rgba(150, 134, 103, 0.7);
+}
+
+.fancy:hover .top-key {
+  left: -2px;
+  width: 0px;
+}
+
+.fancy:hover .bottom-key {
+  right: 0;
+  width: 0;
+}
+
+.fancy:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+i:active {
+  transform: scale(0.90);
+  transition: transform 0.1s ease;
 }
 /*********************************/
 

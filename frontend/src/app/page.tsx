@@ -3,6 +3,7 @@ import Image from "next/image";
 import { uploadImage } from "@/api/menu";
 import PhotoButtonWrapper from "@/components/photo-button-wrapper";
 import LanguageDropdown from "@/components/language-selector";
+import SubmitButton from "@/components/submit-button";
 import { useState } from "react";
 
 export default function Home() {
@@ -63,26 +64,20 @@ export default function Home() {
 
               {/* menu language selector */}
               <LanguageDropdown language={ language } setLanguage={ setLanguage } />
+            </div>
 
+            <div className="flex justify-center mt-5">
               {/* submit button */}
-              <button
-                disabled={loading}
-                onClick={async () => {
-                  if (!imageSrc) return;
-                  const file = await fetch(imageSrc)
-                    .then(res => res.blob())
-                    .then(blob => new File([blob], "upload.png", { type: blob.type }));
-                  await handleUpload(file);
-                }}
-                className="h-10 w-40 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors duration-200"
-              >
-                Get Image
-              </button> 
+              <SubmitButton
+                loading={loading}
+                imageSrc={imageSrc}
+                handleUpload={handleUpload}
+              />
             </div>
           </div>
 
-          <div className="auto-show">
-            <div className="mt-10 mb-10">
+          <div className="">
+            <div className="">
               <div className="w-full flex justify-center">
                 {loading &&
                 <div className="spinner">
