@@ -40,7 +40,7 @@ export default function Home() {
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 gap-16">
         <main className="flex flex-col gap-[32px] row-start-2 items-center pt-[100vh]">
 
-          <div className="auto-show">
+          <div className="auto-show upload-container">
             {/* dotted box */}
             <div className="upload-box">
               {imageSrc ? (
@@ -51,13 +51,13 @@ export default function Home() {
                 />
               ) : (
                 <span className="flex items-center justify-center gap-3">
-                  <i className="fa-solid fa-image fa-2x"></i>
+                  <i className="fa-regular fa-image fa-2x"></i>
                   Upload your image
                 </span>
               )}
             </div>
 
-            <div className="flex gap-10 items-start">
+            <div className="flex gap-[4em] mt-5 items-start justify-center">
               {/* buttons */}
               <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
 

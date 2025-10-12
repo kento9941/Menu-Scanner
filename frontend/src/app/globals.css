@@ -111,6 +111,11 @@ body {
 
 
 /********** Img Upload ***********/
+.upload-container {
+  color: white;
+  filter: drop-shadow(20px 20px 20px rgba(0, 0, 0, 0.4));
+}
+
 .upload-box {
   width: 60vw;
   min-height: 30vh;
@@ -118,11 +123,9 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  color: white;
   font-size: 3em;
   border: 5px dashed white;
   border-radius: 20px;
-  filter: drop-shadow(20px 20px 10px rgba(0, 0, 0, 0.2));
   padding: 1em;
 }
 
