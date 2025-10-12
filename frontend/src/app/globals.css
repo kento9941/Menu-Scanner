@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+body {
+  font-family: Lucida Handwriting;
+  background: linear-gradient(to bottom right, rgba(179, 192, 173, 1), rgba(199, 184, 153, 1));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+.auto-show {
+  animation: text-appear both;
+  animation-timeline: view(20% 10%);
+}
+
+@keyframes text-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+
+/*************** Header **************/
 @keyframes sticky-parallax-header-move-and-size {
 	from {
 		background-position: 50% 0;
@@ -78,19 +105,36 @@
   animation-timeline: scroll();
   animation-range: 0vh 90vh;
 }
+/***********************************/
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(to bottom right, rgba(179, 192, 173, 1), rgba(199, 184, 153, 1));
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
+
+
+
+/********** Img Upload ***********/
+.upload-box {
+  width: 60vw;
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+  font-size: 3em;
+  border: 5px dashed white;
+  border-radius: 20px;
+  filter: drop-shadow(20px 20px 10px rgba(0, 0, 0, 0.2));
+  padding: 1em;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-  color: #fffefd;
+.uploaded-image {
+  object-fit: contain;
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 20px 20px 10px 0 rgba(0,0,0,0.2);
 }
+/***********************************/
+
+
 
 /************ Dropdown *************/
 /* From Uiverse.io by 3bdel3ziz-T */ 
@@ -99,18 +143,18 @@ h1, h2, h3, h4, h5, h6, p {
   cursor: pointer;
   position: relative;
   transition: 300ms;
+  font-family: Lucida Handwriting;
   color: white;
   overflow: hidden;
 }
 
 .selected {
-  background-color: #2a2f3b;
+  background-color: black;
   padding: 5px;
   margin-bottom: 3px;
-  border-radius: 5px;
   position: relative;
   z-index: 100000;
-  font-size: 15px;
+  font-size: px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -130,7 +174,6 @@ h1, h2, h3, h4, h5, h6, p {
 .options {
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
   padding: 5px;
   background-color: #2a2f3b;
   position: relative;
@@ -153,7 +196,6 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .option {
-  border-radius: 5px;
   padding: 5px;
   transition: 300ms;
   background-color: #2a2f3b;
@@ -200,73 +242,89 @@ h1, h2, h3, h4, h5, h6, p {
 
 /************ Loader *************/
 /* From Uiverse.io by SchawnnahJ */ 
-.loader {
-  position: relative;
-  width: 2.5em;
-  height: 2.5em;
-  transform: rotate(165deg);
- }
- 
- .loader:before, .loader:after {
-  content: "";
+/* From Uiverse.io by PriyanshuGupta28 */ 
+.spinner {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  width: 0.5em;
-  height: 0.5em;
-  border-radius: 0.25em;
-  transform: translate(-50%, -50%);
- }
- 
- .loader:before {
-  animation: before8 2s infinite;
- }
- 
- .loader:after {
-  animation: after6 2s infinite;
- }
- 
- @keyframes before8 {
-  0% {
-   width: 0.5em;
-   box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+  width: 9px;
+  height: 9px;
+}
+
+.spinner div {
+  position: absolute;
+  width: 50%;
+  height: 150%;
+  background: white;
+  transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+  animation: spinner-fzua35 1s calc(var(--delay) * 1s) infinite ease;
+}
+
+.spinner div:nth-child(1) {
+  --delay: 0.1;
+  --rotation: 36;
+  --translation: 150;
+}
+
+.spinner div:nth-child(2) {
+  --delay: 0.2;
+  --rotation: 72;
+  --translation: 150;
+}
+
+.spinner div:nth-child(3) {
+  --delay: 0.3;
+  --rotation: 108;
+  --translation: 150;
+}
+
+.spinner div:nth-child(4) {
+  --delay: 0.4;
+  --rotation: 144;
+  --translation: 150;
+}
+
+.spinner div:nth-child(5) {
+  --delay: 0.5;
+  --rotation: 180;
+  --translation: 150;
+}
+
+.spinner div:nth-child(6) {
+  --delay: 0.6;
+  --rotation: 216;
+  --translation: 150;
+}
+
+.spinner div:nth-child(7) {
+  --delay: 0.7;
+  --rotation: 252;
+  --translation: 150;
+}
+
+.spinner div:nth-child(8) {
+  --delay: 0.8;
+  --rotation: 288;
+  --translation: 150;
+}
+
+.spinner div:nth-child(9) {
+  --delay: 0.9;
+  --rotation: 324;
+  --translation: 150;
+}
+
+.spinner div:nth-child(10) {
+  --delay: 1;
+  --rotation: 360;
+  --translation: 150;
+}
+
+@keyframes spinner-fzua35 {
+  0%, 10%, 20%, 30%, 50%, 60%, 70%, 80%, 90%, 100% {
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
   }
- 
-  35% {
-   width: 2.5em;
-   box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
+
+  50% {
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1.5%));
   }
- 
-  70% {
-   width: 0.5em;
-   box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75), 1em 0.5em rgba(111, 202, 220, 0.75);
-  }
- 
-  100% {
-   box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
-  }
- }
- 
- @keyframes after6 {
-  0% {
-   height: 0.5em;
-   box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
-  }
- 
-  35% {
-   height: 2.5em;
-   box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75), -0.5em 0 rgba(233, 169, 32, 0.75);
-  }
- 
-  70% {
-   height: 0.5em;
-   box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
-  }
- 
-  100% {
-   box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
-  }
- }
- 
+} 
 /*********************************/

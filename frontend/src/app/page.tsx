@@ -20,7 +20,6 @@ export default function Home() {
       setExtractedText(data["extracted_text"]);
       setTranslatedText(data["translated_text"]);
       setImageUrls(data["image_urls"])
-
     }
     catch (err)
     {
@@ -41,54 +40,74 @@ export default function Home() {
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 gap-16">
         <main className="flex flex-col gap-[32px] row-start-2 items-center pt-[100vh]">
 
-          {/* dotted box */}
-          <div className="relative w-[60vw] h-[70vh] border-2 border-dashed border-white flex items-center justify-center overflow-hidden">
-            {/* uploaded image */}
-            {imageSrc && (
-              <img
-                src={ imageSrc }
-                alt="Your Menu Image..."
-                className="rounded-lg shadow max-w-full max-h-full object-contain"
-              />
-            )}
-          </div>
-
-          <div className="flex gap-10 items-start">
-            {/* buttons */}
-            <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
-
-            {/* menu language selector */}
-            <LanguageDropdown language={ language } setLanguage={ setLanguage } />
-
-            {/* submit button */}
-            <button
-            disabled={loading}
-            onClick={async () => {
-              if (!imageSrc) return;
-              const file = await fetch(imageSrc)
-                .then(res => res.blob())
-                .then(blob => new File([blob], "upload.png", { type: blob.type }));
-              await handleUpload(file);
-            }}
-            className="h-10 w-40 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors duration-200"
-            >
-              Get Image
-            </button> 
-          </div>
-
-          <div className="mt-10 mb-10">
-            <div className="w-full flex justify-center">
-              {loading && <div className="loader"></div>}
+          <div className="auto-show">
+            {/* dotted box */}
+            <div className="upload-box">
+              {imageSrc ? (
+                <img
+                  src={imageSrc}
+                  alt="Your Menu Image"
+                  className="uploaded-image"
+                />
+              ) : (
+                <span className="flex items-center justify-center gap-3">
+                  <i className="fa-solid fa-image fa-2x"></i>
+                  Upload your image
+                </span>
+              )}
             </div>
 
-            {imageUrls && imageUrls.map((url, idx) => (
-              <img
-                key={idx}
-                src={url}
-                alt={`Dish Image ${idx}`}
-                className="max-w-xs rounded-lg shadow"
-              />
-            ))}
+            <div className="flex gap-10 items-start">
+              {/* buttons */}
+              <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
+
+              {/* menu language selector */}
+              <LanguageDropdown language={ language } setLanguage={ setLanguage } />
+
+              {/* submit button */}
+              <button
+                disabled={loading}
+                onClick={async () => {
+                  if (!imageSrc) return;
+                  const file = await fetch(imageSrc)
+                    .then(res => res.blob())
+                    .then(blob => new File([blob], "upload.png", { type: blob.type }));
+                  await handleUpload(file);
+                }}
+                className="h-10 w-40 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors duration-200"
+              >
+                Get Image
+              </button> 
+            </div>
+          </div>
+
+          <div className="auto-show">
+            <div className="mt-10 mb-10">
+              <div className="w-full flex justify-center">
+                {loading &&
+                <div className="spinner">
+                  <div></div>   
+                  <div></div>    
+                  <div></div>    
+                  <div></div>    
+                  <div></div>    
+                  <div></div>    
+                  <div></div>    
+                  <div></div>    
+                  <div></div>    
+                  <div></div> 
+                </div>}
+              </div>
+
+              {imageUrls && imageUrls.map((url, idx) => (
+                <img
+                  key={idx}
+                  src={url}
+                  alt={`Dish Image ${idx}`}
+                  className="max-w-xs rounded-lg shadow"
+                />
+              ))}
+            </div>
           </div>
           
         </main>
