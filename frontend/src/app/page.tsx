@@ -58,13 +58,13 @@ export default function Home() {
               ) : (
                 <span className="flex items-center justify-center gap-3">
                   <i className="fa-regular fa-image fa-2x"></i>
-                  Upload your image
+                  Upload menu image
                 </span>
               )}
             </div>
 
             <div className="auto-show">
-              <div className="flex gap-[4em] mt-2 items-start justify-center">
+              <div className="flex gap-[4em] items-start justify-center">
                 {/* buttons */}
                 <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
 

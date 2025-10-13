@@ -17,7 +17,7 @@ export default function DeleteButton({
       };
     return (
         <button
-            className="disabled:opacity-40 disabled:cursor-not-allowed"
+            className="disabled:opacity-40"
             onClick={handleDelete}
             disabled={!imageSrc}
         >
