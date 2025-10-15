@@ -46,9 +46,9 @@ export default function Home() {
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 gap-16">
         <main className="flex flex-col gap-[32px] row-start-2 items-center pt-[100vh]">
 
-          <div className="upload-container">
+          <div className="upload-container auto-show">
             {/* dotted box */}
-            <div className="upload-box auto-show">
+            <div className="upload-box">
               {imageSrc ? (
                 <img
                   src={imageSrc}
@@ -58,28 +58,27 @@ export default function Home() {
               ) : (
                 <span className="flex items-center justify-center gap-3">
                   <i className="fa-regular fa-image fa-2x"></i>
-                  Upload menu image
+                  Upload Menu
                 </span>
               )}
             </div>
 
-            <div className="auto-show">
-              <div className="flex gap-[4em] items-start justify-center">
-                {/* buttons */}
-                <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
+            
+            <div className="flex gap-[4em] items-start justify-center mt-5">
+              {/* buttons */}
+              <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
 
-                {/* menu language selector */}
-                <LanguageDropdown language={ language } setLanguage={ setLanguage } />
-              </div>
+              {/* menu language selector */}
+              <LanguageDropdown language={ language } setLanguage={ setLanguage } />
+            </div>
 
-              <div className="flex justify-center mt-5">
-                {/* submit button */}
-                <SubmitButton
-                  loading={loading}
-                  imageSrc={imageSrc}
-                  handleUpload={handleUpload}
-                />
-              </div>
+            <div className="flex justify-center mt-5">
+              {/* submit button */}
+              <SubmitButton
+                loading={loading}
+                imageSrc={imageSrc}
+                handleUpload={handleUpload}
+              />
             </div>
           </div>
 

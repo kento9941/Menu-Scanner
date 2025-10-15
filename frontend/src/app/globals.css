@@ -314,25 +314,6 @@ body {
   color: white;
 }
 
-.fancy .top-key,
-.fancy .bottom-key {
-  position: absolute;
-  height: 2px;
-  width: 60%;
-  background: white;
-  transition: width 0.5s ease-out, left 0.3s ease-out;
-}
-
-.fancy .top-key {
-  top: -2px;
-  left: 20%;
-}
-
-.fancy .bottom-key {
-  bottom: -2px;
-  right: 20%;
-}
-
 .fancy:hover {
   background: white;
 }
@@ -352,16 +333,6 @@ body {
 
 .fancy:hover .text {
   color: rgba(150, 134, 103, 0.7);
-}
-
-.fancy:hover .top-key {
-  left: -2px;
-  width: 0px;
-}
-
-.fancy:hover .bottom-key {
-  right: 0;
-  width: 0;
 }
 
 .fancy:active {
