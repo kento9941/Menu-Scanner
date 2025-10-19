@@ -13,6 +13,7 @@ export default function Home() {
   const [extractedText, setExtractedText] = useState<string>("");
   const [translatedText, setTranslatedText] = useState<string>("");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [clickedImage, setClickedImage] = useState<string | null>(null);
 
   async function handleUpload(file: File) {
     try {
@@ -105,9 +106,24 @@ export default function Home() {
                 src={url}
                 alt={`Dish Image ${idx}`}
                 className="dish-image"
+                onClick={() => setClickedImage(url)}
               />
             ))}
           </div>
+
+          {clickedImage && (
+            <div
+              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+              onClick={() => setClickedImage(null)}
+            >
+              <img
+                src={clickedImage}
+                alt="Clicked Image"
+                className="max-h-[90vh] max-w-[90vw] shadow-lg"
+                onClick={(e) => e.stopPropagation()} // don't close when clicking on the image
+              />
+              
+            </div>)}
           
         </main>
         <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
