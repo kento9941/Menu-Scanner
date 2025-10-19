@@ -9,7 +9,7 @@ class PixabayAPI(ImageAccessorInterface):
         load_dotenv()
         self.__api_key = os.getenv("PIXABAY_API_KEY")
 
-    def get_image(self, query: str, language: str = "en", max_images=3) -> list[str]:
+    def get_image(self, query: str, language: str = "en", max_images=6) -> list[str]:
         url = 'https://pixabay.com/api/'
         params = {
             'key': self.__api_key,

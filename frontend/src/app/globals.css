@@ -42,7 +42,7 @@ body {
 
 @keyframes sticky-parallax-header-darken {
   from {
-      background-color: rgba(0,0,0,0.4);
+      background-color: rgba(0,0,0,0.3);
   }
   to {
       background-color: rgba(0,0,0,1);
@@ -110,7 +110,7 @@ body {
 
 
 
-/********** Img Upload ***********/
+/********** Images ***********/
 .upload-container {
   color: white;
   filter: drop-shadow(20px 20px 20px rgba(0, 0, 0, 0.4));
@@ -132,6 +132,11 @@ body {
   object-fit: contain;
   max-width: 90%;
   max-height: 90%;
+  box-shadow: 20px 20px 10px 0 rgba(0,0,0,0.2);
+}
+
+.dish-image {
+  max-width: 25em;
   box-shadow: 20px 20px 10px 0 rgba(0,0,0,0.2);
 }
 /***********************************/

@@ -82,33 +82,31 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="">
-            <div className="">
-              <div className="w-full flex justify-center">
-                {loading &&
-                <div className="spinner">
-                  <div></div>   
-                  <div></div>    
-                  <div></div>    
-                  <div></div>    
-                  <div></div>    
-                  <div></div>    
-                  <div></div>    
-                  <div></div>    
-                  <div></div>    
-                  <div></div> 
-                </div>}
-              </div>
-
-              {imageUrls && imageUrls.map((url, idx) => (
-                <img
-                  key={idx}
-                  src={url}
-                  alt={`Dish Image ${idx}`}
-                  className="max-w-xs rounded-lg shadow"
-                />
-              ))}
+          
+          {loading && <div className="w-full flex justify-center mt-[5em]">
+            <div className="spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
             </div>
+          </div>}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+            {imageUrls && imageUrls.map((url, idx) => (
+              <img
+                key={idx}
+                src={url}
+                alt={`Dish Image ${idx}`}
+                className="dish-image"
+              />
+            ))}
           </div>
           
         </main>
