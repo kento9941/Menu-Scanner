@@ -345,11 +345,11 @@ body {
   transition: transform 0.1s ease;
 }
 
-i {
+i:not(.no-click) {
   cursor: pointer;
 }
 
-i:active {
+i:not(.no-click):active {
   transform: scale(0.90);
   transition: transform 0.1s ease;
 }

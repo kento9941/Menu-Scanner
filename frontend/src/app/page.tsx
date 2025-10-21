@@ -58,7 +58,7 @@ export default function Home() {
                 />
               ) : (
                 <span className="flex items-center justify-center gap-3">
-                  <i className="fa-regular fa-image fa-2x"></i>
+                  <i className="fa-regular fa-image fa-2x no-click" ></i>
                   Upload Menu
                 </span>
               )}
