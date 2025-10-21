@@ -109,6 +109,22 @@ body {
 
 
 
+/********** Text ************/
+.dish-texts {
+  font-size: 2em;
+  color: white;
+  margin-top: 2em;
+  text-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
+}
+
+.dish-texts .text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+}
+/****************************/
+
+
+
 
 /********** Images ***********/
 .upload-container {
@@ -132,12 +148,12 @@ body {
   object-fit: contain;
   max-width: 90%;
   max-height: 90%;
-  box-shadow: 20px 20px 10px 0 rgba(0,0,0,0.2);
+  box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
 }
 
 .dish-image {
   max-width: 25em;
-  box-shadow: 20px 20px 10px 0 rgba(0,0,0,0.2);
+  box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
 }
 /***********************************/
 

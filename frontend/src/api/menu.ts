@@ -1,6 +1,6 @@
 export async function uploadImage(sourceLanguage: string, file: File) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000)
+  const timeout = setTimeout(() => controller.abort(), 20000)
 
   try {
     const formData = new FormData();    

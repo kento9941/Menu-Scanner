@@ -13,7 +13,7 @@ export default function Home() {
   const [extractedText, setExtractedText] = useState<string>("");
   const [translatedText, setTranslatedText] = useState<string>("");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [clickedImage, setClickedImage] = useState<string | null>(null);
+  const [clickedImage, setClickedImage] = useState<string>("");
 
   async function handleUpload(file: File) {
     try {
@@ -99,7 +99,24 @@ export default function Home() {
             </div>
           </div>}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+          <div className="dish-texts">
+            {extractedText && (
+              <div className="flex items-start">
+                <span className="w-[10em] shrink-0 font-bold">Original Text</span>
+                <span className="text break-words">{extractedText}</span>
+              </div>
+            )}
+
+            {translatedText && (
+              <div className="flex items-start">
+                <span className="w-[10em] shrink-0 font-bold">Translation</span>
+                <span className="text break-words">{translatedText}</span>
+              </div>
+            )}
+          </div>
+
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2em] mt-[2em]">
             {imageUrls && imageUrls.map((url, idx) => (
               <img
                 key={idx}
@@ -114,7 +131,7 @@ export default function Home() {
           {clickedImage && (
             <div
               className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
-              onClick={() => setClickedImage(null)}
+              onClick={() => setClickedImage("")}
             >
               <img
                 src={clickedImage}
