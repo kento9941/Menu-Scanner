@@ -6,7 +6,7 @@ import DeleteButton from "./delete-button";
 
 export default function PhotoButtonWrapper({
     imageSrc,
-    setImageSrc
+    setImageSrc,
 }: {
     imageSrc: string | null;
     setImageSrc: (src: string | null) => void;

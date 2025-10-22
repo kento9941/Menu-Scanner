@@ -4,6 +4,7 @@ import { uploadImage } from "@/api/menu";
 import PhotoButtonWrapper from "@/components/photo-button-wrapper";
 import LanguageDropdown from "@/components/language-selector";
 import SubmitButton from "@/components/submit-button";
+import MenuImage from "@/components/menu-image";
 import DishImages from "@/components/dish-images";
 import { useState } from "react";
 
@@ -13,6 +14,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [extractedText, setExtractedText] = useState<string>("");
   const [translatedText, setTranslatedText] = useState<string>("");
+  const [menuImage, setMenuImage] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   async function handleUpload(file: File) {
@@ -51,12 +53,8 @@ export default function Home() {
 
             {/* upload box */}
             <div className="upload-box">
-              {(imageSrc && imageUrls.length == 0 ) ? (
-                <img
-                  src={imageSrc}
-                  alt="Your Menu Image"
-                  className="uploaded-image"
-                />
+              {(imageSrc) ? (
+                <img src={imageSrc} alt="Your Menu Image" className="uploaded-image"/>
               ) : (
                 <span className="flex items-center justify-center gap-3">
                   <i className="fa-regular fa-image fa-2x no-click" ></i>
@@ -96,25 +94,37 @@ export default function Home() {
             </div>
           </div>}
 
-          {/* extracted & translated texts */}
-          <div className="dish-texts">
-            {extractedText && (
-              <div className="flex items-start">
-                <span className="w-[10em] shrink-0 font-bold">Original Text</span>
-                <span className="text break-words">{extractedText}</span>
-              </div>
-            )}
+          <div className="flex items-center justify-center gap-[2em] mt-[5em]">
+            {/* menu image */}
+            <MenuImage
+              imageSrc={ imageSrc }
+              setImageSrc={ setImageSrc }
+              menuImage={ menuImage }
+              setMenuImage={ setMenuImage }
+              imageUrls={ imageUrls }
+            />
 
-            {translatedText && (
-              <div className="flex items-start">
-                <span className="w-[10em] shrink-0 font-bold">Translation</span>
-                <span className="text break-words">{translatedText}</span>
-              </div>
-            )}
+            {/* extracted & translated texts */}
+            <div className="dish-texts">
+              {extractedText && (
+                <div className="flex items-start">
+                  <span className="w-[10em] shrink-0 font-bold">Original Text</span>
+                  <span className="text break-words">{extractedText}</span>
+                </div>
+              )}
+
+              {translatedText && (
+                <div className="flex items-start">
+                  <span className="w-[10em] shrink-0 font-bold">Translation</span>
+                  <span className="text break-words">{translatedText}</span>
+                </div>
+              )}
+            </div>
           </div>
+          
 
           {/* dish images display */}
-          <DishImages setImageSrc={ setImageSrc } imageUrls={ imageUrls } />
+          <DishImages imageUrls={ imageUrls } />
           
         </main>
 

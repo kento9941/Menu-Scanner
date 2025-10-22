@@ -2,7 +2,7 @@
 
 export default function DeleteButton({
     imageSrc,
-    setImageSrc
+    setImageSrc,
 }: {
     imageSrc: string | null;
     setImageSrc: (src: string | null) => void;

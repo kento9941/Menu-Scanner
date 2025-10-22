@@ -2,10 +2,8 @@
 import { useState } from "react";
 
 export default function DishImages({
-    setImageSrc,
     imageUrls,
 }: {
-    setImageSrc: (imageSrc: string | null) => void;
     imageUrls: string[];
 }) {
     const [clickedImage, setClickedImage] = useState<string>("");
