@@ -4,6 +4,7 @@ import { uploadImage } from "@/api/menu";
 import PhotoButtonWrapper from "@/components/photo-button-wrapper";
 import LanguageDropdown from "@/components/language-selector";
 import SubmitButton from "@/components/submit-button";
+import DishImages from "@/components/dish-images";
 import { useState } from "react";
 
 export default function Home() {
@@ -13,7 +14,6 @@ export default function Home() {
   const [extractedText, setExtractedText] = useState<string>("");
   const [translatedText, setTranslatedText] = useState<string>("");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [clickedImage, setClickedImage] = useState<string>("");
 
   async function handleUpload(file: File) {
     try {
@@ -48,9 +48,10 @@ export default function Home() {
         <main className="flex flex-col gap-[32px] row-start-2 items-center pt-[100vh]">
 
           <div className="upload-container auto-show">
-            {/* dotted box */}
+
+            {/* upload box */}
             <div className="upload-box">
-              {imageSrc ? (
+              {(imageSrc && imageUrls.length == 0 ) ? (
                 <img
                   src={imageSrc}
                   alt="Your Menu Image"
@@ -66,7 +67,7 @@ export default function Home() {
 
             
             <div className="flex gap-[4em] items-start justify-center mt-5">
-              {/* buttons */}
+              {/* upload buttons */}
               <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
 
               {/* menu language selector */}
@@ -75,15 +76,11 @@ export default function Home() {
 
             <div className="flex justify-center mt-5">
               {/* submit button */}
-              <SubmitButton
-                loading={loading}
-                imageSrc={imageSrc}
-                handleUpload={handleUpload}
-              />
+              <SubmitButton loading={ loading } imageSrc={ imageSrc } handleUpload={ handleUpload } />
             </div>
           </div>
 
-          
+          {/* loader */}
           {loading && <div className="w-full flex justify-center mt-[5em]">
             <div className="spinner">
               <div></div>
@@ -99,6 +96,7 @@ export default function Home() {
             </div>
           </div>}
 
+          {/* extracted & translated texts */}
           <div className="dish-texts">
             {extractedText && (
               <div className="flex items-start">
@@ -115,34 +113,11 @@ export default function Home() {
             )}
           </div>
 
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2em] mt-[2em]">
-            {imageUrls && imageUrls.map((url, idx) => (
-              <img
-                key={idx}
-                src={url}
-                alt={`Dish Image ${idx}`}
-                className="dish-image"
-                onClick={() => setClickedImage(url)}
-              />
-            ))}
-          </div>
-
-          {clickedImage && (
-            <div
-              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
-              onClick={() => setClickedImage("")}
-            >
-              <img
-                src={clickedImage}
-                alt="Clicked Image"
-                className="max-h-[90vh] max-w-[90vw] shadow-lg"
-                onClick={(e) => e.stopPropagation()} // don't close when clicking on the image
-              />
-              
-            </div>)}
+          {/* dish images display */}
+          <DishImages setImageSrc={ setImageSrc } imageUrls={ imageUrls } />
           
         </main>
+
         <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
           <a
             className="flex items-center gap-2 hover:underline hover:underline-offset-4"

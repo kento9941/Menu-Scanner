@@ -1,6 +1,6 @@
 export async function uploadImage(sourceLanguage: string, file: File) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 20000)
+  const timeout = setTimeout(() => controller.abort(), 30000)
 
   try {
     const formData = new FormData();    
@@ -23,7 +23,7 @@ export async function uploadImage(sourceLanguage: string, file: File) {
 
   } catch (err: any) {
     if (err.name === "AbortError") {
-      throw new Error("Upload failed: timeout after 10s");
+      throw new Error("Upload failed: timeout after 30s");
     }
     throw new Error(err.message || "Upload failed");
   }
