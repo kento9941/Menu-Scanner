@@ -150,6 +150,10 @@ body {
   box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
 }
 
+.menu-image {
+  filter: drop-shadow(10px 10px 10px 0 rgba(0,0,0,0.2))
+}
+
 .dish-image {
   max-width: 25em;
   box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);

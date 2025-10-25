@@ -6,25 +6,25 @@ export default function MenuImage({
     setImageSrc,
     menuImage,
     setMenuImage,
-    imageUrls
+    extractedText
 }: {
     imageSrc: string | null;
     setImageSrc: (imageSrc: string | null) => void;
     menuImage: string | null;
     setMenuImage: (menuImage: string) => void;
-    imageUrls: string[]
-}) {
+    extractedText: string;
+}) {    
     useEffect(() => {
-        if (imageUrls.length > 0 && imageSrc && imageSrc !== menuImage) {
-          setMenuImage(imageSrc);
-          setImageSrc(null);
+        if (extractedText !== "" && imageSrc && imageSrc !== menuImage) {
+            setMenuImage(imageSrc);
+            setImageSrc(null);
         }
-    }, [imageUrls]);
+    }, [extractedText]);
          
     return (
         (menuImage) && (
             <div className="flex justify-center items-center w-[25vw] h-[25vh]">
-                <img src={menuImage} alt="Your Menu Image" className="w-full h-full object-contain"/>
+                <img src={menuImage} alt="Your Menu Image" className="menu-image w-full h-full object-contain"/>
             </div>
         )
     )

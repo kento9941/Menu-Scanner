@@ -101,7 +101,7 @@ export default function Home() {
               setImageSrc={ setImageSrc }
               menuImage={ menuImage }
               setMenuImage={ setMenuImage }
-              imageUrls={ imageUrls }
+              extractedText={ extractedText }
             />
 
             {/* extracted & translated texts */}
@@ -123,7 +123,7 @@ export default function Home() {
           </div>
           
           {/* dish images display */}
-          <DishImages imageUrls={ imageUrls } />
+          <DishImages imageUrls={ imageUrls } menuImage={ menuImage } />
           
         </main>
 

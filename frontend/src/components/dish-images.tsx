@@ -2,8 +2,10 @@
 import { useState } from "react";
 
 export default function DishImages({
-    imageUrls,
+    menuImage,
+    imageUrls
 }: {
+    menuImage: string | null;
     imageUrls: string[];
 }) {
     const [clickedImage, setClickedImage] = useState<string>("");
@@ -20,6 +22,11 @@ export default function DishImages({
                     onClick={() => setClickedImage(url)}
                 />
                 ))}
+                {(imageUrls.length === 0 && menuImage) && (
+                    <div className="col-span-full flex justify-center items-center">
+                        <span className="dish-texts">No Images Found</span>
+                    </div>
+                )}
             </div>
 
             {clickedImage && (
