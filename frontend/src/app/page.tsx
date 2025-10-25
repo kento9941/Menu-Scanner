@@ -7,6 +7,7 @@ import SubmitButton from "@/components/submit-button";
 import MenuImage from "@/components/menu-image";
 import DishImages from "@/components/dish-images";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -37,15 +38,22 @@ export default function Home() {
   }
 
   return (
-    <>
-      <header id="sticky-parallax-header">
-        <span
-          className="header-text cursor-pointer"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          Menu Scanner
-        </span>
-      </header>
+    <AnimatePresence mode="wait">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        <header id="sticky-parallax-header">
+          <span
+            className="header-text cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            Menu Scanner
+          </span>
+        </header>
+      </motion.div>
+      
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 gap-16">
         <main className="flex flex-col gap-[32px] row-start-2 items-center pt-[100vh]">
 
@@ -94,36 +102,52 @@ export default function Home() {
             </div>
           </div>}
 
-          <div className="flex items-center justify-center gap-[5em] mt-[5em] mb-[2em]">
-            {/* menu image */}
-            <MenuImage
-              imageSrc={ imageSrc }
-              setImageSrc={ setImageSrc }
-              menuImage={ menuImage }
-              setMenuImage={ setMenuImage }
-              extractedText={ extractedText }
-            />
+          {/* menu image and texts animation */}
+          <motion.div
+            key={extractedText}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+          >
+            <div className="flex items-center justify-center gap-[5em] mt-[5em] mb-[2em]">
+              {/* menu image */}
+              <MenuImage
+                imageSrc={ imageSrc }
+                setImageSrc={ setImageSrc }
+                menuImage={ menuImage }
+                setMenuImage={ setMenuImage }
+                extractedText={ extractedText }
+              />
 
-            {/* extracted & translated texts */}
-            <div className="dish-texts">
-              {extractedText && (
-                <div className="flex items-start">
-                  <span className="w-[9em] shrink-0 font-bold">Original Text</span>
-                  <span className="text break-words">{extractedText}</span>
-                </div>
-              )}
+              {/* extracted & translated texts */}
+              <div className="dish-texts">
+                {extractedText && (
+                  <div className="flex items-start">
+                    <span className="w-[9em] shrink-0 font-bold">Original Text</span>
+                    <span className="text break-words">{extractedText}</span>
+                  </div>
+                )}
 
-              {translatedText && (
-                <div className="flex items-start">
-                  <span className="w-[9em] shrink-0 font-bold">Translation</span>
-                  <span className="text break-words">{translatedText}</span>
-                </div>
-              )}
+                {translatedText && (
+                  <div className="flex items-start">
+                    <span className="w-[9em] shrink-0 font-bold">Translation</span>
+                    <span className="text break-words">{translatedText}</span>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          
-          {/* dish images display */}
-          <DishImages imageUrls={ imageUrls } menuImage={ menuImage } />
+          </motion.div>
+
+          {/* dish image anmation */}
+          <motion.div
+            key={imageUrls[0] || "empty"}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
+          >
+            {/* dish images display */}
+            <DishImages imageUrls={ imageUrls } menuImage={ menuImage } />
+          </motion.div>
           
         </main>
 
@@ -175,6 +199,6 @@ export default function Home() {
           </a>
         </footer>
       </div>
-    </>
+    </AnimatePresence>
   );
 }
