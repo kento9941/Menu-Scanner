@@ -2,7 +2,7 @@
 
 body {
   font-family: Lucida Handwriting;
-  background: linear-gradient(to bottom right, rgba(179, 192, 173, 1), rgba(199, 184, 153, 1));
+  background: linear-gradient(to bottom right, rgba(179, 192, 173, 1) 0 150vh, rgba(179, 192, 173, 1) 150vh, rgba(199, 184, 153, 1));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -150,14 +150,25 @@ body {
   box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
 }
 
-.menu-image {
-  max-width: 30%;
-  max-height: 30%;
-  box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
-}
-
 .dish-image {
   max-width: 25em;
+  box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
+}
+/***********************************/
+
+
+
+/************ Crop Modal ***********/
+.crop-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 70vw;
+  max-height: 70vh;
+  z-index: 10;
+  background-color: black;
+  padding: 1rem;
   box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
 }
 /***********************************/
@@ -293,7 +304,6 @@ body {
 
 /********* Buttons *********/
 .fancy {
-  background-color: transparent;
   border: 0.25em solid white;
   border-radius: 0;
   box-sizing: border-box;
@@ -372,6 +382,65 @@ i:not(.no-click) {
 
 i:not(.no-click):active {
   transform: scale(0.90);
+  transition: transform 0.1s ease;
+}
+
+.fancy-small {
+  border: 0.15em solid white;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.05em;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0.5em 1em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 1em;
+}
+
+.fancy-small .text {
+  font-weight: normal;
+  font-size: 1em;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+
+.fancy-small:hover {
+  background: white;
+}
+
+.fancy-small::after {
+  content: "";
+  position: absolute;
+  inset: 0; 
+  border: 0.1em solid rgba(150, 134, 103, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.fancy-small:hover::after {
+  opacity: 1;
+}
+
+.fancy-small:hover .text {
+  color: rgba(150, 134, 103, 0.7);
+}
+
+.fancy-small:active {
+  transform: scale(0.95);
   transition: transform 0.1s ease;
 }
 /*********************************/

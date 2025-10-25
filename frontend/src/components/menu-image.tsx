@@ -23,7 +23,9 @@ export default function MenuImage({
          
     return (
         (menuImage) && (
-            <img src={menuImage} alt="Your Menu Image" className="menu-image"/>
+            <div className="flex justify-center items-center w-[25vw] h-[25vh]">
+                <img src={menuImage} alt="Your Menu Image" className="w-full h-full object-contain"/>
+            </div>
         )
     )
 }

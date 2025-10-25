@@ -22,6 +22,7 @@ export default function UploadButton({
             };
             reader.readAsDataURL(file);
         }
+        event.target.value = "";
     };
 
     return (

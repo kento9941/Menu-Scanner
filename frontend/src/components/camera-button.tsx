@@ -21,6 +21,7 @@ export default function CameraButton({
             };
             reader.readAsDataURL(file);
         }
+        event.target.value = "";
     };
     return (
         <>

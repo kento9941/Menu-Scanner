@@ -94,7 +94,7 @@ export default function Home() {
             </div>
           </div>}
 
-          <div className="flex items-center justify-center gap-[2em] mt-[5em]">
+          <div className="flex items-center justify-center gap-[5em] mt-[5em] mb-[2em]">
             {/* menu image */}
             <MenuImage
               imageSrc={ imageSrc }
@@ -108,21 +108,20 @@ export default function Home() {
             <div className="dish-texts">
               {extractedText && (
                 <div className="flex items-start">
-                  <span className="w-[10em] shrink-0 font-bold">Original Text</span>
+                  <span className="w-[9em] shrink-0 font-bold">Original Text</span>
                   <span className="text break-words">{extractedText}</span>
                 </div>
               )}
 
               {translatedText && (
                 <div className="flex items-start">
-                  <span className="w-[10em] shrink-0 font-bold">Translation</span>
+                  <span className="w-[9em] shrink-0 font-bold">Translation</span>
                   <span className="text break-words">{translatedText}</span>
                 </div>
               )}
             </div>
           </div>
           
-
           {/* dish images display */}
           <DishImages imageUrls={ imageUrls } />
           
