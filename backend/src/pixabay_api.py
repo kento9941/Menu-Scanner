@@ -9,7 +9,7 @@ class PixabayAPI(ImageAccessorInterface):
         load_dotenv()
         self.__api_key = os.getenv("PIXABAY_API_KEY")
 
-    def get_image(self, query: str, language: str = "en", max_images=3) -> list[str]:
+    def get_image(self, query: str, language: str = "en", max_images=6) -> list[str]:
         url = 'https://pixabay.com/api/'
         params = {
             'key': self.__api_key,
@@ -25,17 +25,18 @@ class PixabayAPI(ImageAccessorInterface):
             response = requests.get(url, params=params)
             response.raise_for_status()  # raise an exception for bad responses
             data = response.json()
+            # print(f"Pixabay query: {query}, response: {data}")
         except requests.RequestException as e:
             print(f"Error fetching images: {e}")
-            return set()
+            return []
         except ValueError:
             print(f"Error decoding JSON response.")
-            return set()
+            return []
 
         # check for API errors
         if "hits" not in data:
             print(f"Unexpected API response: {data}")
-            return set()
+            return []
 
         # get image urls
         image_urls = set(hit['webformatURL'] for hit in data.get('hits', []))

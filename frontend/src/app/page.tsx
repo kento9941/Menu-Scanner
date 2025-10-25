@@ -3,7 +3,11 @@ import Image from "next/image";
 import { uploadImage } from "@/api/menu";
 import PhotoButtonWrapper from "@/components/photo-button-wrapper";
 import LanguageDropdown from "@/components/language-selector";
+import SubmitButton from "@/components/submit-button";
+import MenuImage from "@/components/menu-image";
+import DishImages from "@/components/dish-images";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -11,6 +15,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [extractedText, setExtractedText] = useState<string>("");
   const [translatedText, setTranslatedText] = useState<string>("");
+  const [menuImage, setMenuImage] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   async function handleUpload(file: File) {
@@ -20,7 +25,6 @@ export default function Home() {
       setExtractedText(data["extracted_text"]);
       setTranslatedText(data["translated_text"]);
       setImageUrls(data["image_urls"])
-
     }
     catch (err)
     {
@@ -34,97 +38,167 @@ export default function Home() {
   }
 
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <p>selected lang: { language }</p>
-        {/* wheel picker */}
-        <LanguageDropdown language={ language } setLanguage={ setLanguage } />
+    <AnimatePresence mode="wait">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        <header id="sticky-parallax-header">
+          <span
+            className="header-text cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            Menu Scanner
+          </span>
+        </header>
+      </motion.div>
+      
+      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 gap-16">
+        <main className="flex flex-col gap-[32px] row-start-2 items-center pt-[100vh]">
 
-        {/* uploaded image */}
-        {imageSrc && (
-          <img
-            src={ imageSrc }
-            alt="Your Menu Image..."
-            className="max-w-xs rounded-lg shadow"
-          />
-        )}
+          <div className="upload-container auto-show">
 
-        {/* buttons */}
-        <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc } />
+            {/* upload box */}
+            <div className="upload-box">
+              {(imageSrc) ? (
+                <img src={imageSrc} alt="Your Menu Image" className="uploaded-image"/>
+              ) : (
+                <span className="flex items-center justify-center gap-3">
+                  <i className="fa-regular fa-image fa-2x no-click" ></i>
+                  Upload Menu
+                </span>
+              )}
+            </div>
 
-        <button
-          onClick={async () => {
-            if (!imageSrc) return;
-            const file = await fetch(imageSrc)
-              .then(res => res.blob())
-              .then(blob => new File([blob], "upload.png", { type: blob.type }));
-            await handleUpload(file);
-          }}
-        >
-          Get Image
-        </button>        
-        
-        <div className="w-full flex justify-center">
-          {loading && <div className="loader"></div>}
-        </div>
+            
+            <div className="flex gap-[4em] items-start justify-center mt-5">
+              {/* upload buttons */}
+              <PhotoButtonWrapper imageSrc={ imageSrc } setImageSrc={ setImageSrc }/>
 
-        {imageUrls && imageUrls.map((url, idx) => (
-          <img
-            key={idx}
-            src={url}
-            alt={`Dish Image ${idx}`}
-            className="max-w-xs rounded-lg shadow"
-          />
-        ))}
+              {/* menu language selector */}
+              <LanguageDropdown language={ language } setLanguage={ setLanguage } />
+            </div>
 
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <div className="flex justify-center mt-5">
+              {/* submit button */}
+              <SubmitButton loading={ loading } imageSrc={ imageSrc } handleUpload={ handleUpload } />
+            </div>
+          </div>
+
+          {/* loader */}
+          {loading && <div className="w-full flex justify-center mt-[5em]">
+            <div className="spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>}
+
+          {/* menu image and texts animation */}
+          <motion.div
+            key={extractedText}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+          >
+            <div className="flex items-center justify-center gap-[5em] mt-[5em] mb-[2em]">
+              {/* menu image */}
+              <MenuImage
+                imageSrc={ imageSrc }
+                setImageSrc={ setImageSrc }
+                menuImage={ menuImage }
+                setMenuImage={ setMenuImage }
+                extractedText={ extractedText }
+              />
+
+              {/* extracted & translated texts */}
+              <div className="dish-texts">
+                {extractedText && (
+                  <div className="flex items-start">
+                    <span className="w-[9em] shrink-0 font-bold">Original Text</span>
+                    <span className="text break-words">{extractedText}</span>
+                  </div>
+                )}
+
+                {translatedText && (
+                  <div className="flex items-start">
+                    <span className="w-[9em] shrink-0 font-bold">Translation</span>
+                    <span className="text break-words">{translatedText}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* dish image anmation */}
+          <motion.div
+            key={imageUrls[0] || "empty"}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
+          >
+            {/* dish images display */}
+            <DishImages imageUrls={ imageUrls } menuImage={ menuImage } />
+          </motion.div>
+          
+        </main>
+
+        <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+          <a
+            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              aria-hidden
+              src="/file.svg"
+              alt="File icon"
+              width={16}
+              height={16}
+            />
+            Learn
+          </a>
+          <a
+            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              aria-hidden
+              src="/window.svg"
+              alt="Window icon"
+              width={16}
+              height={16}
+            />
+            Examples
+          </a>
+          <a
+            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+            href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              aria-hidden
+              src="/globe.svg"
+              alt="Globe icon"
+              width={16}
+              height={16}
+            />
+            Go to nextjs.org →
+          </a>
+        </footer>
+      </div>
+    </AnimatePresence>
   );
 }

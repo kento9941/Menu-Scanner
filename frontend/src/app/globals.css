@@ -1,34 +1,190 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  font-family: Lucida Handwriting;
+  background: linear-gradient(to bottom right, rgba(179, 192, 173, 1) 0 150vh, rgba(179, 192, 173, 1) 150vh, rgba(199, 184, 153, 1));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.auto-show {
+  animation: text-appear both;
+  animation-timeline: view(10% 0);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes text-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0)
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+/*************** Header **************/
+@keyframes sticky-parallax-header-move-and-size {
+	from {
+		background-position: 50% 0;
+		height: 100vh;
+    width: 100vw;
+	}
+	to {
+		background-position: 50% 100%;
+		height: 10vh;
+		width: 100vw;
+	}
 }
+
+@keyframes sticky-parallax-header-darken {
+  from {
+      background-color: rgba(0,0,0,0.3);
+  }
+  to {
+      background-color: rgba(0,0,0,1);
+  }
+}
+
+@keyframes sticky-parallax-header-text-size-and-color {
+  from {
+    font-size: calc(4vw + 1em);
+    color: white;
+  }
+  to {
+    font-size: 2em;
+    color: rgba(199, 184, 153, 1);
+  }
+}
+
+#sticky-parallax-header {
+	position: fixed;
+	top: 0;
+  background-image: url("/background.jpg");
+  background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+  font-family: Lucida Handwriting;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+	animation: sticky-parallax-header-move-and-size linear forwards;
+	animation-timeline: scroll();
+	animation-range: 0vh 90vh;
+}
+
+#sticky-parallax-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0);
+  z-index: 0;
+  animation: sticky-parallax-header-darken linear forwards;
+  animation-timeline: scroll();
+  animation-range: 0vh 90vh;
+}
+
+.header-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: white;
+  text-shadow: 20px 20px 20px 0 rgba(0,0,0,0.7);
+  font-family: Lucida Handwriting;
+  animation: sticky-parallax-header-text-size-and-color linear forwards;
+  animation-timeline: scroll();
+  animation-range: 0vh 90vh;
+}
+/***********************************/
+
+
+
+/********** Text ************/
+.dish-texts {
+  font-size: 2em;
+  color: white;
+  text-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
+}
+
+.dish-texts .text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+}
+/****************************/
+
+
+
+
+/********** Images ***********/
+.upload-container {
+  color: white;
+  filter: drop-shadow(20px 20px 20px rgba(0, 0, 0, 0.4));
+}
+
+.upload-box {
+  width: 60vw;
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 3em;
+  border: 0.1em dashed white;
+  padding: 1em;
+}
+
+.uploaded-image {
+  object-fit: contain;
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
+}
+
+.menu-image {
+  filter: drop-shadow(10px 10px 10px 0 rgba(0,0,0,0.2))
+}
+
+.dish-image {
+  max-width: 25em;
+  box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
+}
+/***********************************/
+
+
+
+/************ Crop Modal ***********/
+.crop-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 70vw;
+  max-height: 70vh;
+  z-index: 10;
+  background-color: black;
+  padding: 1rem;
+  box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2);
+}
+/***********************************/
+
+
 
 /************ Dropdown *************/
 /* From Uiverse.io by 3bdel3ziz-T */ 
 .select {
-  width: fit-content;
+  width: 15em;
+  height: fit-content;
+  margin-top: 0.2em;
   cursor: pointer;
   position: relative;
   transition: 300ms;
@@ -36,14 +192,22 @@ body {
   overflow: hidden;
 }
 
+.toggle {
+  display: none;
+}
+
 .selected {
-  background-color: #2a2f3b;
-  padding: 5px;
-  margin-bottom: 3px;
-  border-radius: 5px;
+  background-color: transparent;
+  border: 0.2em solid white;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-left: 1em;
+  padding-right: 0.75em;
+  margin-bottom: 0.1em;
   position: relative;
-  z-index: 100000;
-  font-size: 15px;
+  z-index: 3;
+  font-size: 1.25em;
+  font-weight: 1.25em;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,50 +215,61 @@ body {
 
 .arrow {
   position: relative;
-  right: 0px;
-  height: 10px;
+  right: 0;
+  height: 1em;
   transform: rotate(-90deg);
-  width: 25px;
+  width: 0.75em;
   fill: white;
-  z-index: 100000;
+  z-index: 3;
   transition: 300ms;
 }
 
 .options {
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
-  padding: 5px;
-  background-color: #2a2f3b;
+  padding: 0em;
+  background-color: transparent;
+  border: 0.1em solid white;
   position: relative;
-  top: -100px;
-  max-height: 100px;
+  top: -5em;
+  max-height: 7.5em;
   overflow-y: auto;
+  overflow-x: hidden;
   opacity: 0;
   transition: 300ms;
-}
-
-
-
-.select:hover > .options {
-  opacity: 1;
-  top: 0;
-}
-
-.select:hover > .selected .arrow {
-  transform: rotate(0deg);
+  pointer-events: none;
 }
 
 .option {
-  border-radius: 5px;
-  padding: 5px;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-left: 1em;
   transition: 300ms;
-  background-color: #2a2f3b;
-  width: 150px;
-  font-size: 15px;
+  background-color: transparent;
+  border: 0.1em solid white;
+  width: 15em;
+  font-size: 1.25em;
 }
+
+.toggle:checked ~ .options {
+  opacity: 1;
+  top: 0;
+  pointer-events: auto;
+}
+
+.toggle:checked ~ .selected {
+  background-color: white;
+  color: rgba(150, 134, 103, 0.7);
+}
+
+.toggle:checked ~ .selected .arrow {
+  fill: rgba(150, 134, 103, 0.7);
+  transform: rotate(0deg);
+}
+
 .option:hover {
-  background-color: #323741;
+  color: rgba(150, 134, 103, 0.7);
+  background-color: white;
 }
 
 .options input[type="radio"] {
@@ -131,75 +306,235 @@ body {
 /*********************************/
 
 
-/************ Loader *************/
-/* From Uiverse.io by SchawnnahJ */ 
-.loader {
+/********* Buttons *********/
+.fancy {
+  border: 0.25em solid white;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 100;
+  letter-spacing: 0.05em;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0.5em 1em;
   position: relative;
-  width: 2.5em;
-  height: 2.5em;
-  transform: rotate(165deg);
- }
- 
- .loader:before, .loader:after {
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 2em;
+}
+
+.fancy::before {
+  content: "";
+  width: 3rem;
+  height: 2rem;
+  background: transparent;
+  top: 50%;
+  left: 1.5em;
+  position: absolute;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+}
+
+.fancy .text {
+  font-weight: normal;
+  font-size: 1em;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+
+.fancy:hover {
+  background: white;
+}
+
+.fancy::after {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
+  inset: 0; 
+  border: 0.1em solid rgba(150, 134, 103, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.fancy:hover::after {
+  opacity: 1;
+}
+
+.fancy:hover .text {
+  color: rgba(150, 134, 103, 0.7);
+}
+
+.fancy:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+i:not(.no-click) {
+  cursor: pointer;
+}
+
+i:not(.no-click):active {
+  transform: scale(0.90);
+  transition: transform 0.1s ease;
+}
+
+.fancy-small {
+  border: 0.15em solid white;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.05em;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0.5em 1em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 1em;
+}
+
+.fancy-small .text {
+  font-weight: normal;
+  font-size: 1em;
+  font-weight: bold;
   display: block;
-  width: 0.5em;
-  height: 0.5em;
-  border-radius: 0.25em;
-  transform: translate(-50%, -50%);
- }
- 
- .loader:before {
-  animation: before8 2s infinite;
- }
- 
- .loader:after {
-  animation: after6 2s infinite;
- }
- 
- @keyframes before8 {
-  0% {
-   width: 0.5em;
-   box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+
+.fancy-small:hover {
+  background: white;
+}
+
+.fancy-small::after {
+  content: "";
+  position: absolute;
+  inset: 0; 
+  border: 0.1em solid rgba(150, 134, 103, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.fancy-small:hover::after {
+  opacity: 1;
+}
+
+.fancy-small:hover .text {
+  color: rgba(150, 134, 103, 0.7);
+}
+
+.fancy-small:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+/*********************************/
+
+
+/************ Loader *************/
+/* From Uiverse.io by SchawnnahJ */ 
+/* From Uiverse.io by PriyanshuGupta28 */ 
+.spinner {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+}
+
+.spinner div {
+  position: absolute;
+  width: 50%;
+  height: 150%;
+  background: white;
+  transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+  animation: spinner-fzua35 1s calc(var(--delay) * 1s) infinite ease;
+}
+
+.spinner div:nth-child(1) {
+  --delay: 0.1;
+  --rotation: 36;
+  --translation: 150;
+}
+
+.spinner div:nth-child(2) {
+  --delay: 0.2;
+  --rotation: 72;
+  --translation: 150;
+}
+
+.spinner div:nth-child(3) {
+  --delay: 0.3;
+  --rotation: 108;
+  --translation: 150;
+}
+
+.spinner div:nth-child(4) {
+  --delay: 0.4;
+  --rotation: 144;
+  --translation: 150;
+}
+
+.spinner div:nth-child(5) {
+  --delay: 0.5;
+  --rotation: 180;
+  --translation: 150;
+}
+
+.spinner div:nth-child(6) {
+  --delay: 0.6;
+  --rotation: 216;
+  --translation: 150;
+}
+
+.spinner div:nth-child(7) {
+  --delay: 0.7;
+  --rotation: 252;
+  --translation: 150;
+}
+
+.spinner div:nth-child(8) {
+  --delay: 0.8;
+  --rotation: 288;
+  --translation: 150;
+}
+
+.spinner div:nth-child(9) {
+  --delay: 0.9;
+  --rotation: 324;
+  --translation: 150;
+}
+
+.spinner div:nth-child(10) {
+  --delay: 1;
+  --rotation: 360;
+  --translation: 150;
+}
+
+@keyframes spinner-fzua35 {
+  0%, 10%, 20%, 30%, 50%, 60%, 70%, 80%, 90%, 100% {
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
   }
- 
-  35% {
-   width: 2.5em;
-   box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
+
+  50% {
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1.5%));
   }
- 
-  70% {
-   width: 0.5em;
-   box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75), 1em 0.5em rgba(111, 202, 220, 0.75);
-  }
- 
-  100% {
-   box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
-  }
- }
- 
- @keyframes after6 {
-  0% {
-   height: 0.5em;
-   box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
-  }
- 
-  35% {
-   height: 2.5em;
-   box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75), -0.5em 0 rgba(233, 169, 32, 0.75);
-  }
- 
-  70% {
-   height: 0.5em;
-   box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
-  }
- 
-  100% {
-   box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
-  }
- }
- 
+} 
 /*********************************/
