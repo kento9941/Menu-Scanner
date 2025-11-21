@@ -21,10 +21,13 @@ export async function uploadImage(sourceLanguage: string, file: File) {
     }    
     return res.json();
 
-  } catch (err: any) {
-    if (err.name === "AbortError") {
+  } catch (err) {
+    if (err instanceof Error && err.name === "AbortError") {
       throw new Error("Upload failed: timeout after 30s");
     }
-    throw new Error(err.message || "Upload failed");
+    if (err instanceof Error) {
+      throw new Error(err.message || "Upload failed");
+    }
+    throw new Error("Upload failed");
   }
 }
