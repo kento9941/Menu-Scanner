@@ -457,6 +457,35 @@ i:not(.no-click):active {
   transform: scale(0.95);
   transition: transform 0.1s ease;
 }
+
+@media screen and (max-width: 768px) {
+  .fancy {
+    border: 0.2em solid white;
+    font-weight: normal;
+    padding: 0.25em 0.5em;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+  }
+
+  .fancy::before {
+    width: 3rem;
+    height: 2rem;
+    left: 1em;
+  }
+
+  .fancy .text {
+    font-weight: normal;
+    font-size: 1em;
+  }
+
+  .fancy-small {
+    font-size: 1em;
+  }
+
+  .fancy-small .text {
+    font-size: 1em;
+  }
+}
 /*********************************/
 
 
