@@ -11,7 +11,7 @@ body {
 
 @media screen and (max-width: 768px) {
   body {
-    background: linear-gradient(to bottom right, rgba(179, 192, 173, 1) 0%, rgba(179, 192, 173, 1) 50%, rgba(199, 184, 153, 1) 100%);
+    background: linear-gradient(to bottom right, rgba(179, 192, 173, 1) 0%, rgba(179, 192, 173, 1) 35%, rgba(199, 184, 153, 1) 100%);
   }
 }
 
@@ -210,7 +210,7 @@ body {
 
 @media screen and (max-width: 768px) {
   .select {
-    width: 10rem;    
+    width: 10rem;
   }
 }
 
@@ -220,7 +220,7 @@ body {
 
 .selected {
   background-color: transparent;
-  border: 0.2em solid white;
+  border: 0.2rem solid white;
   padding-top: 0.25em;
   padding-bottom: 0.25em;
   padding-left: 1em;
@@ -473,14 +473,13 @@ i:not(.no-click):active {
 @media screen and (max-width: 768px) {
   .fancy {
     width: 10rem;
-    border: 0.25rem solid white;
-    font-weight: normal;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    height: 3rem;
     font-size: 1rem;
-    letter-spacing: 0.05em;
+    border: 0.2rem solid white;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .fancy::before {
