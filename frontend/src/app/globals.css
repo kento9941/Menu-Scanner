@@ -11,7 +11,7 @@ body {
 
 @media screen and (max-width: 768px) {
   body {
-    background: linear-gradient(to bottom right, rgba(179, 192, 173, 1) 0 100vh, rgba(179, 192, 173, 1) 100vh, rgba(199, 184, 153, 1));
+    background: linear-gradient(to bottom right, rgba(179, 192, 173, 1) 0%, rgba(179, 192, 173, 1) 50%, rgba(199, 184, 153, 1) 100%);
   }
 }
 
@@ -210,7 +210,7 @@ body {
 
 @media screen and (max-width: 768px) {
   .select {
-    width: 10em;
+    width: 10rem;    
   }
 }
 
@@ -472,6 +472,7 @@ i:not(.no-click):active {
 
 @media screen and (max-width: 768px) {
   .fancy {
+    width: 10rem;
     border: 0.25rem solid white;
     font-weight: normal;
     padding-top: 0.25rem;
