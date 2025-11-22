@@ -71,7 +71,7 @@ export default function Home() {
                 )}
               </div>
   
-              <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start justify-center mt-5">
+              <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-4 md:gap-8 mt-5">
                 <PhotoButtonWrapper imageSrc={imageSrc} setImageSrc={setImageSrc} />
                 <LanguageDropdown language={language} setLanguage={setLanguage} />
               </div>
