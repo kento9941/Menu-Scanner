@@ -6,8 +6,11 @@ export async function uploadImage(sourceLanguage: string, file: File) {
     const formData = new FormData();    
     formData.append("source_language", sourceLanguage);
     formData.append("image", file);
+
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    if (!backendUrl) throw new Error("Backend URL is not defined");
   
-    const res = await fetch("http://localhost:8000/upload-image", {
+    const res = await fetch(`${backendUrl}/upload-image`, {
       method: "POST",
       body: formData,
       signal: controller.signal,
