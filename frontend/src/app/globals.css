@@ -460,30 +460,33 @@ i:not(.no-click):active {
 
 @media screen and (max-width: 768px) {
   .fancy {
-    border: 0.2em solid white;
+    border: 0.25rem solid white;
     font-weight: normal;
-    padding: 0.25em 0.5em;
-    font-size: 1em;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 1rem;
     letter-spacing: 0.05em;
   }
 
   .fancy::before {
-    width: 3rem;
-    height: 2rem;
-    left: 1em;
+    width: 7rem;
+    height: fit-content;
+    left: 0.5rem;
   }
 
   .fancy .text {
     font-weight: normal;
-    font-size: 1em;
+    font-size: 1rem;
   }
 
   .fancy-small {
-    font-size: 1em;
+    font-size: 1rem;
   }
 
   .fancy-small .text {
-    font-size: 1em;
+    font-size: 1rem;
   }
 }
 /*********************************/
