@@ -21,7 +21,7 @@ export default function DeleteButton({
             onClick={handleDelete}
             disabled={!imageSrc}
         >
-            <i className="fa-regular fa-trash-can fa-3x"></i>
+            <i className="fa-regular fa-trash-can text-2xl md:text-3xl"></i>
         </button>
     );
 }

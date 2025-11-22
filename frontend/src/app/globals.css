@@ -146,7 +146,9 @@ body {
 @media screen and (max-width: 768px) {
   .upload-box {
     width: 80vw;
+    min-height: 15vh;
     font-size: 1.5em;
+    border: 0.05em dashed white;
     padding: 0.5em;
   }
 }
