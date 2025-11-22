@@ -27,7 +27,7 @@ export default function UploadButton({
 
     return (
         <>
-            <i className="fa-solid fa-upload text-2xl md:text-3xl" onClick={ handleButtonClick }></i>
+            <i className="fa-solid fa-upload fa-3x" onClick={ handleButtonClick }></i>
             {/* hidden input */}
             <input
                 type="file"

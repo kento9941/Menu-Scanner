@@ -25,7 +25,7 @@ export default function CameraButton({
     };
     return (
         <>
-            <i className="fa-solid fa-camera text-2xl md:text-3xl" onClick={ handleButtonClick }></i>
+            <i className="fa-solid fa-camera fa-3x" onClick={ handleButtonClick }></i>
             {/* hidden input */}
             <input
                 type="file"
