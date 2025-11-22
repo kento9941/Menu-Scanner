@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 body {
-  font-family: Lucida Handwriting;
+  font-family: "Lucida Handwriting";
   background: linear-gradient(to bottom right, rgba(179, 192, 173, 1) 0 150vh, rgba(179, 192, 173, 1) 150vh, rgba(199, 184, 153, 1));
   background-size: cover;
   background-position: center;
