@@ -9,6 +9,12 @@ body {
   background-attachment: scroll;
 }
 
+@media screen and (max-width: 768px) {
+  body {
+    background: linear-gradient(to bottom right, rgba(179, 192, 173, 1) 0 100vh, rgba(179, 192, 173, 1) 100vh, rgba(199, 184, 153, 1));
+  }
+}
+
 .auto-show {
   animation: text-appear both;
   animation-timeline: view(10% 0);
@@ -200,6 +206,12 @@ body {
   transition: 300ms;
   color: white;
   overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .select {
+    width: 10em;
+  }
 }
 
 .toggle {
