@@ -58,7 +58,7 @@ export default function Home() {
         <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-4 md:p-8 gap-8 md:gap-16">
           <main className="flex flex-col gap-4 md:gap-8 row-start-2 items-center pt-[100vh]">
   
-            <div className="upload-container auto-show">
+            <div className="upload-container auto-show flex flex-col items-center justify-center">
               {/* upload box */}
               <div className="upload-box">
                 {imageSrc ? (
