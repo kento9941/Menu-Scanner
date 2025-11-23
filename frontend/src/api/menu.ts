@@ -9,6 +9,8 @@ export async function uploadImage(sourceLanguage: string, file: File) {
 
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
     if (!backendUrl) throw new Error("Backend URL is not defined");
+
+    console.log("ENV:", process.env.NEXT_PUBLIC_BACKEND_URL)
   
     const res = await fetch(`${backendUrl}/upload-image`, {
       method: "POST",
