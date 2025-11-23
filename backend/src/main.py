@@ -3,20 +3,28 @@ from fastapi.middleware.cors import CORSMiddleware
 from io import BytesIO
 import numpy as np
 from PIL import Image
+import os
+from dotenv import load_dotenv
 from src.schemas.menu import MenuScanResponse
 from src.menu_scanner import MenuScanner
 from src.text_extractor import TextExtractor
 from src.translator import Translator
 from src.pixabay_api import PixabayAPI
 
+load_dotenv()
+
 app = FastAPI()
+
+# Get allowed origins from environment variable, fallback to defaults
+frontend_url = os.getenv("FRONTEND_URL", "https://menu-scanner-eight.vercel.app")
+allowed_origins = [
+    "http://localhost:3000",
+    frontend_url
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000", 
-        "https://menu-scanner-eight.vercel.app"
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
