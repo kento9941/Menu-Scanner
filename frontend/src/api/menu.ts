@@ -15,6 +15,8 @@ export async function uploadImage(sourceLanguage: string, file: File) {
     const res = await fetch(`${backendUrl}/upload-image`, {
       method: "POST",
       body: formData,
+      mode: "cors",
+      credentials: "omit",
       signal: controller.signal,
     });
 
