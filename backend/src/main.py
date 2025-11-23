@@ -30,6 +30,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+print("DEBUG FRONTEND_URL:", os.getenv("FRONTEND_URL"))
+print("DEBUG ALLOWED_ORIGINS:", allowed_origins)
+
 menu_scanner = MenuScanner(TextExtractor(), Translator(), PixabayAPI())
 
 @app.post("/upload-image", response_model = MenuScanResponse)
