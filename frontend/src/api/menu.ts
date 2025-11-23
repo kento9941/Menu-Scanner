@@ -1,6 +1,6 @@
 export async function uploadImage(sourceLanguage: string, file: File) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 30000)
+  const timeout = setTimeout(() => controller.abort(), 120000) // 2 minutes for EasyOCR model loading
 
   try {
     const formData = new FormData();    
@@ -26,7 +26,7 @@ export async function uploadImage(sourceLanguage: string, file: File) {
 
   } catch (err) {
     if (err instanceof Error && err.name === "AbortError") {
-      throw new Error("Upload failed: timeout after 30s");
+      throw new Error("Upload failed: timeout after 2 minutes. The backend may be loading models - please try again.");
     }
     if (err instanceof Error) {
       throw new Error(err.message || "Upload failed");
