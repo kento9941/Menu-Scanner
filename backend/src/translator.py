@@ -1,15 +1,18 @@
 import requests
+import os
 
 class Translator:
     def __init__(self):
-        self.__url = "http://localhost:5000/translate"
+        self.__url = "https://libretranslate.com/translate"
+        self.__api_key = os.getenv("LIBRETRANSLATE_API_KEY")
 
     def translate_text(self, original_text: str, source_language: str = "auto", target_language: str = "en") -> str:
         payload = {
             "q": original_text,
             "source": source_language,
             "target": target_language,
-            "format": "text"
+            "format": "text",
+            "api_key": self.__api_key
         }
 
         # POST
