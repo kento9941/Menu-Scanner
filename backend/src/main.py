@@ -48,3 +48,7 @@ async def upload_image(source_language: str = Form(...), image: UploadFile = Fil
         raise HTTPException(status_code=400, detail="Invalid image file")
     
     return menu_scanner.scan_menu(image_numpy_array, source_language, "en")
+
+@app.post("/test")
+async def test():
+    return {"message": "POST test successful", "cors_works": True}
