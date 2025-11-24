@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, Form, File, HTTPException
+from fastapi.responses import JSONResponse  # ← Add this import
 from fastapi.middleware.cors import CORSMiddleware
 from io import BytesIO
 import numpy as np
@@ -48,6 +49,18 @@ async def upload_image(source_language: str = Form(...), image: UploadFile = Fil
         raise HTTPException(status_code=400, detail="Invalid image file")
     
     return menu_scanner.scan_menu(image_numpy_array, source_language, "en")
+
+@app.options("/upload-image")
+async def options_upload_image():
+    return JSONResponse(
+        content={"message": "CORS preflight"},
+        headers={
+            "Access-Control-Allow-Origin": frontend_url,
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Credentials": "true"
+        }
+    )
 
 @app.post("/test")
 async def test():
