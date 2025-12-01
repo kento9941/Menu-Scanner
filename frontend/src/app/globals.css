@@ -66,6 +66,19 @@ body {
   }
 }
 
+@media screen and (max-width: 768px) {
+  @keyframes sticky-parallax-header-text-size-and-color {
+    from {
+      font-size: calc(4vw + 0.5em);
+      color: white;
+    }
+    to {
+      font-size: 1.5em;
+      color: rgba(199, 184, 153, 1);
+    }
+  }
+}
+
 #sticky-parallax-header {
 	position: fixed;
 	top: 0;
