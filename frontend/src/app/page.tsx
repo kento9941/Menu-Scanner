@@ -98,7 +98,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
             >
-              <div className="flex items-center justify-center gap-[5em] mt-[5em] mb-[2em]">
+              <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-4 md:gap-[5em] mt-[5em] mb-[2em]">
                 <MenuImage
                   imageSrc={imageSrc}
                   setImageSrc={setImageSrc}
@@ -107,7 +107,7 @@ export default function Home() {
                   extractedText={extractedText}
                 />
   
-                <div className="dish-texts">
+                <div className="dish-texts text-[1em] md:text-[2em]">
                   {extractedText && (
                     <div className="flex items-start">
                       <span className="w-[9em] shrink-0 font-bold">Original Text</span>
