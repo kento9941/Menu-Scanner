@@ -2,6 +2,21 @@
 
 Menu Scanner is a two-part application (FastAPI backend + Next.js frontend) that extracts text from restaurant menus, translates it to English, and returns relevant dish images using the Pixabay API. The goal is to help travelers quickly understand foreign-language menus by simply snapping or uploading a photo.
 
+## Demo
+### Desktop
+<div align="center">
+  <img src="./assets/menu_scanner_1.png" style="max-width: 80%; margin-bottom: 30px;">
+  <img src="./assets/menu_scanner_2.png" style="max-width: 80%; margin-bottom: 30px;">
+  <video src="./assets/menu_scanner_video_1.mp4" width="80%" controls>
+</div>
+
+### Mobile
+<div align="center">
+  <img src="./assets/menu_scanner_3.png" style="max-width: 80%; margin-right: 30px; margin-bottom: 30px;">
+  <img src="./assets/menu_scanner_4.png" style="max-width: 80%; margin-bottom: 30px;">
+</div>
+
+
 ## Features
 - Capture or upload menu photos directly from the browser (desktop or mobile).
 - Crop images before submission for cleaner OCR results.

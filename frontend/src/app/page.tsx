@@ -107,16 +107,16 @@ export default function Home() {
                   extractedText={extractedText}
                 />
   
-                <div className="dish-texts text-[1em] md:text-[2em]">
+                <div className="dish-texts text-[1.5em] md:text-[2em]">
                   {extractedText && (
-                    <div className="flex items-start">
+                    <div className="flex items-start mt-[0.5em]">
                       <span className="w-[9em] shrink-0 font-bold">Original Text</span>
                       <span className="text break-words">{extractedText}</span>
                     </div>
                   )}
   
                   {translatedText && (
-                    <div className="flex items-start">
+                    <div className="flex items-start mt-[0.5em]">
                       <span className="w-[9em] shrink-0 font-bold">Translation</span>
                       <span className="text break-words">{translatedText}</span>
                     </div>
